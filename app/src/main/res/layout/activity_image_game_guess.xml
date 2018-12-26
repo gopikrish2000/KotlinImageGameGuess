@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <import type="android.view.View" />
+        <import type="android.arch.lifecycle.MutableLiveData" />
+        <variable
+            name="imageGameVM"
+            type="sample.gopi.com.fastapplication.imagegameguess.viewModel.ImageGameVM"/>
+        <variable
+            name="stringlist"
+            type="java.util.List&lt;String&gt;" />
+
+    </data>
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".imagegameguess.activities.ImageGameGuessActivity">
+
+
+        <TextView
+            android:id="@+id/gameTv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
+            android:text="@{imageGameVM.textData}"
+            app:layout_constraintStart_toStartOf="@+id/guideline2"
+            app:layout_constraintTop_toTopOf="parent"/>
+
+        <android.support.constraint.Guideline
+            android:id="@+id/guideline2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_begin="16dp"/>
+
+        <TextView
+            android:id="@+id/gameAnimTv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:text="@{String.valueOf(imageGameVM.countDown)}"
+            app:layout_constraintStart_toEndOf="@+id/gameTv"
+            app:layout_constraintTop_toTopOf="@+id/gameTv"
+            tools:layout_editor_absoluteY="32dp"/>
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/gameRv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="25dp"
+            app:layout_constraintStart_toStartOf="@+id/guideline2"
+            app:layout_constraintTop_toBottomOf="@+id/gameAnimTv"/>
+
+        <android.support.constraint.Group
+            android:id="@+id/topTvGroup"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="@{imageGameVM.countDown > 0 ? View.VISIBLE: View.GONE}"
+            app:constraint_referenced_ids="gameTv,gameAnimTv"/>
+
+        <TextView
+            android:id="@+id/textView6"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{stringlist[1]}"
+            android:visibility="gone"
+            app:layout_constraintStart_toEndOf="@+id/gameAnimTv"
+            app:layout_constraintTop_toTopOf="@+id/gameAnimTv"
+            />
+    </android.support.constraint.ConstraintLayout>
+</layout>
